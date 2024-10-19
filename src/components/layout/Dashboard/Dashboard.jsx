@@ -4,6 +4,7 @@ import GlobalApi from "./../../../../service/GlobalApi";
 import { useEffect,useState } from "react";
 import ResumeCardItem from "./components/ResumeCardItem";
 import { LoaderCircle } from "lucide-react";
+import { toast } from "sonner";
 
 
 
@@ -23,8 +24,9 @@ const Dashboard = () => {
     await GlobalApi.GetUserResumes(user?.primaryEmailAddress.emailAddress).then(res=>{
       setResumeList(res.data.data);
       
-      console.log(resumeList);
+      
     })
+    resumeList?toast.success("Successfully Loaded Resumes"):toast.info("No Resumes found");
     setLoading(false)
   }
 
